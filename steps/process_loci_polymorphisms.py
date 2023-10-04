@@ -152,6 +152,9 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
     config = kwargs['config']
 
     locus_count = 0
+
+    all_variability = {}
+
     for locus in config['CONSTANTS']['LOCI']:
         cytoplasmic_sequences = fetch_locus_data(config, locus)
         print (locus)
@@ -168,8 +171,14 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
             print (variability[position]['normalised_shannon_entropy'])
             print ('')
 
-        locus_output_path = f"{output_path}/{slugify(locus)}_variability.json"
+        locus_output_path = f"{output_path}/polymorphisms/{slugify(locus)}_variability.json"
         write_json(locus_output_path, variability, pretty=True)
+
+        all_variability[locus] = variability
+    
+    all_variability_output_path = f"{output_path}/polymorphisms/hla_loci.json"
+
+    write_json(all_variability_output_path, all_variability, pretty=True)
 
     action_output = {
         'loci_processed': locus_count    
