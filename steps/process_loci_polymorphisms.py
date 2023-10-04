@@ -171,12 +171,12 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
             print (variability[position]['normalised_shannon_entropy'])
             print ('')
 
-        locus_output_path = f"{output_path}/polymorphisms/{slugify(locus)}_variability.json"
+        locus_output_path = f"{output_path}/polymorphisms/loci/{slugify(locus)}_variability.json"
         write_json(locus_output_path, variability, pretty=True)
 
         all_variability[locus] = variability
     
-    all_variability_output_path = f"{output_path}/polymorphisms/hla_loci.json"
+    all_variability_output_path = f"{output_path}/polymorphisms/loci/hla_loci.json"
 
     write_json(all_variability_output_path, all_variability, pretty=True)
 

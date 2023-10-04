@@ -26,7 +26,7 @@ def create_folder_structure(**kwargs) -> Dict:
     config = kwargs['config']
 
     i = 0
-    for folder in ['images','polymorphisms']:
+    for folder in ['images/positions', 'images/entropy', 'polymorphisms/loci', 'polymorphisms/allele_group']:
         create_folder(f"{output_path}/{folder}", verbose)
         i += 1
 
