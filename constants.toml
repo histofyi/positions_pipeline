@@ -1,0 +1,2 @@
+LOCUS_BASE_URL="https://github.com/histofyi/alleles/raw/staging/processed_data/cytoplasmic_sequences/"
+LOCI=["HLA-A","HLA-B","HLA-C","HLA-E","HLA-F","HLA-G"]
