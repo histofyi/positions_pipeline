@@ -23,19 +23,13 @@ def map_pocket(position:int) -> str:
 def create_entropy_plot(domain:Dict, variablility:Dict, output_path:str, locus:str):
     positions = []
     entropies = []
-    max_entropy = 0
-    max_position = 0
+
 
     for position in range(domain['start'], domain['end']):
         entropy = variablility[str(position)]['normalised_shannon_entropy']
-        if entropy > max_entropy:
-            max_entropy = entropy
-            max_position = position
+
         entropies.append(entropy)
         positions.append(position)
-
-    print (max_position)
-    print (max_entropy)
 
     fig, ax = plt.subplots(figsize=(25,5))
 
@@ -60,10 +54,10 @@ def create_entropy_plot(domain:Dict, variablility:Dict, output_path:str, locus:s
             ax.text(positions[index], entropies[index], f" {positions[index]}", size=14, ha='center', va='bottom', rotation=90)
     plt.ylim(0, 1)
     plt.xlim(domain['start']-1,domain['end'])
-    print (f"{domain['label']} positional sequence entropy for {locus}")
+   
     plt.xticks(ticks=xticks, labels=xticks, fontsize=14)
     plt.yticks(ticks=yticks, labels=yticks, fontsize=14)
-    plt.xlabel(f"Position in {domain['name']} domain", labelpad=10, fontsize=16)
+    plt.xlabel(f"Position in {domain['label']}", labelpad=10, fontsize=16)
     plt.ylabel("Normalised Shannon entropy", labelpad=10, fontsize=16)
 
     plt.savefig(f"{output_path}/images/entropy/hla_{slugify(locus)}_{domain['name']}.svg", format='svg', bbox_inches='tight')
@@ -100,8 +94,6 @@ def create_entropy_plots(**kwargs) -> Dict:
         variability = read_json(locus_input_path)['variability']
 
         for domain in class_i_domains:
-            print (domain)
-            print (class_i_domains[domain])
             create_entropy_plot(class_i_domains[domain], variability, output_path, locus)
 
         locus_count += 1
