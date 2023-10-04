@@ -106,9 +106,9 @@ def process_position(variability:Dict, position:int) -> Dict:
     probabilities = (counts / total)
 
 
-    shannon_entropy = -np.sum(probabilities * np.log2(probabilities))
+    shannon_entropy = float(np.sum(probabilities * np.log2(probabilities)))
 
-    normalised_shannon_entropy = 1/np.log2(20) * shannon_entropy
+    normalised_shannon_entropy = abs(float(1/np.log2(20) * shannon_entropy))
 
     rarities = []
 
@@ -126,7 +126,7 @@ def process_position(variability:Dict, position:int) -> Dict:
         'rarities': rarities,
         'labels': labels,
         'shannon_entropy': float(shannon_entropy),
-        'normalised_shannon_entropy': float(normalised_shannon_entropy)
+        'normalised_shannon_entropy': normalised_shannon_entropy
     }
 
     return position_information
@@ -163,22 +163,19 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
 
         variability = build_locus_variability_dict(cytoplasmic_sequences)
 
-        test_positions = [3, 24, 45, 67, 68, 71, 7, 9, 11]
-
-        for position in test_positions: 
-            print (f"Position {position}")
-            print (dict(zip(variability[position]['percentages'],variability[position]['rarities'])))
-            print (variability[position]['normalised_shannon_entropy'])
-            print ('')
+        output = {
+            'variability': variability,
+            'unique_sequence_count': len(cytoplasmic_sequences),
+        }
 
         locus_output_path = f"{output_path}/polymorphisms/loci/{slugify(locus)}_variability.json"
-        write_json(locus_output_path, variability, pretty=True)
+        write_json(locus_output_path, output, pretty=True)
 
-        all_variability[locus] = variability
-    
+        all_variability[locus] = output
+
     all_variability_output_path = f"{output_path}/polymorphisms/loci/hla_loci.json"
 
-    write_json(all_variability_output_path, all_variability, pretty=True)
+    write_json(all_variability_output_path, output, pretty=True)
 
     action_output = {
         'loci_processed': locus_count    
