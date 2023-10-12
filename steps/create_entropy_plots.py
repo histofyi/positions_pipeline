@@ -95,7 +95,7 @@ def create_entropy_plots(**kwargs) -> Dict:
 
         for domain in class_i_domains:
             create_entropy_plot(class_i_domains[domain], variability, output_path, locus)
-
+        print ("Entropy plots created")
         locus_count += 1
 
     action_output = {

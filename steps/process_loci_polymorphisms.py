@@ -158,7 +158,7 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
     for locus in config['CONSTANTS']['LOCI']:
         cytoplasmic_sequences = fetch_locus_data(config, locus)
         print (locus)
-        print (len(cytoplasmic_sequences))
+        print (f"{len(cytoplasmic_sequences)} unique cytoplasmic sequences found")
         locus_count += 1
 
         variability = build_locus_variability_dict(cytoplasmic_sequences)

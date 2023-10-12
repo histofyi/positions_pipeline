@@ -12,6 +12,7 @@ def run_pipeline(**kwargs) -> Dict:
 
     pipeline.run_step('1') # Creates the folder structure used by the pipeline
     pipeline.run_step('2') # Process the polymorphisms for each locus in the IPD (initially only HLA)
+    pipeline.run_step('3') # Create entropy plots for each locus in the IPD (initially only HLA)    
 
     action_logs = pipeline.finalise()
 
