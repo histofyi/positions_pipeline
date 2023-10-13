@@ -42,6 +42,6 @@ steps = {
         'is_multi': False,
         'multi_param': None,
         'multi_options': None,
-        'has_progress': False
+        'has_progress': True
     }
 }
