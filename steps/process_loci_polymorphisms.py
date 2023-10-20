@@ -173,7 +173,7 @@ def process_loci_polymorphisms(**kwargs) -> Dict:
 
         all_variability[slugify(locus)] = output
 
-    all_variability_output_path = f"{output_path}/polymorphisms/loci/hla_loci.json"
+    all_variability_output_path = f"{output_path}/polymorphisms/loci/hla_class_i_variability.json"
 
     write_json(all_variability_output_path, all_variability, pretty=True)
 
